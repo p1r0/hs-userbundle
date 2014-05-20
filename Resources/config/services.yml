@@ -1,0 +1,5 @@
+services:
+    user_bundle.configure_menu_listener:
+        class: Heapstersoft\Base\UserBundle\EventListener\ConfigureMenuListener
+        tags:
+          - { name: kernel.event_listener, event: hsadmin_bundle.menu_configure, method: onMenuConfigure }

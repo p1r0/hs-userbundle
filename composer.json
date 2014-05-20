@@ -1,0 +1,17 @@
+{
+    "name": "p1r0/hs-userbundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tabaré Caorsi",
+            "email": "tabare@heapstersoft.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-0": {
+            "Heapstersoft\\Base\\UserBundle\\": ""
+        }
+    },
+    "target-dir": "Heapstersoft/Base/UserBundle"
+}

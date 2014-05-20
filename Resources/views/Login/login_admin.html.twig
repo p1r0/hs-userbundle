@@ -1,0 +1,54 @@
+{% extends 'AdminBundle::clean.html.twig' %}
+
+
+{% block content %}
+<style>
+.form-signin {
+                    max-width: 300px;
+                    padding: 19px 29px 29px;
+                    margin: 0 auto 20px;
+                    background-color: #fff;
+                    border: 1px solid #e5e5e5;
+                    -webkit-border-radius: 5px;
+                    -moz-border-radius: 5px;
+                    border-radius: 5px;
+                    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                    box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                }
+                .form-signin .form-signin-heading,
+                .form-signin .checkbox {
+                    margin-bottom: 10px;
+                }
+                .form-signin input[type="text"],
+                .form-signin input[type="password"] {
+                    font-size: 16px;
+                    height: auto;
+                    margin-bottom: 15px;
+                    padding: 7px 9px;
+                }
+
+    </style>
+
+
+
+<form class="form-signin" action="{{ path('admin_login_check') }}" method="post">
+    {% if error %}
+        <div class="alert alert-error">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ error.message }}
+        </div>
+    {% endif %}
+    <h2 class="form-signin-heading">{% trans %}Login{% endtrans %}</h2>
+    <input type="text" id="username" name="_username" value="{{ last_username }}"  class="input-block-level" placeholder="{% trans %}Username{% endtrans %}" />
+
+    <input type="password" id="password" name="_password"  class="input-block-level" placeholder="{% trans %}Password{% endtrans %}" />
+
+    {#
+        If you want to control the URL the user is redirected to on success (more details below)
+        <input type="hidden" name="_target_path" value="/account" />
+    #}
+
+    <button class="btn btn-large btn-primary" type="submit">{% trans %}Login{% endtrans %}</button>
+</form>
+{% endblock content %}
