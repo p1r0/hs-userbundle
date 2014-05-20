@@ -14,6 +14,10 @@
                 <source>Delete User</source>
                 <target>Borrar Usuario</target>
             </trans-unit>
+            <trans-unit  id="4">
+                <source>New User</source>
+                <target>Crear Usuario</target>
+            </trans-unit>
             
             <trans-unit id="1500">
                 <source>Username</source>
@@ -40,7 +44,7 @@
                 <source>Login</source>
                 <target>Iniciar Sesión</target>
             </trans-unit>
-            
+
             <!-- Misc -->
             <trans-unit  id="10000">
                 <source>Users</source>
