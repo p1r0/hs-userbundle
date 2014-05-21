@@ -69,9 +69,9 @@ class LoginController extends Controller
      */
     public function loginCheckAction()
     {
-        
+
     }
-    
+
     /**
      * @Route("/logout", name="logout")
      * @Route("/admin/logout", name="admin_logout")
@@ -79,6 +79,6 @@ class LoginController extends Controller
      */
     public function logoutAction()
     {
-        
+
     }
 }

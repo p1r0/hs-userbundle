@@ -1,0 +1,9 @@
+#contact:
+#    resource: "@ContactBundle/Controller/"
+#    type:     annotation
+#    prefix:   /
+
+_user_admin:
+    resource: "@UserBundle/Controller"
+    type:     annotation
+    prefix:   /

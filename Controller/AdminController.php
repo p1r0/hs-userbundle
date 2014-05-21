@@ -66,7 +66,7 @@ class AdminController extends Controller
     
     /**
      * @Route("/users/{id}/update", name="_admin_userbundle_update")
-     * @Method("POST")
+     * @Method({"POST"})
      * @Secure(roles="ROLE_ADMIN")
      * @SatisfiesParentSecurityPolicy
      */
