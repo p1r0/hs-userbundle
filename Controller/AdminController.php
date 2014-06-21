@@ -2,6 +2,8 @@
 
 namespace Heapstersoft\Base\UserBundle\Controller;
 
+use Heapstersoft\Base\UserBundle\Entity\User;
+use Heapstersoft\Base\UserBundle\Services\UserManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -51,7 +53,32 @@ class AdminController extends Controller
      */
     public function createAction(Request $request)
     {
-        return parent::createAction($request);
+        $templateString = $this->resolveTemplateString('new');
+        $routes = $this->getAllRoutes();
+        $actionTitle = $this->getActionTitle('new', 'Creation');
+        /** @var User $entity */
+        $entity = new $this->entityClass();
+        $form   = $this->createForm(new $this->formType(), $entity);
+        $form->bind($request);
+
+        if ($form->isValid()) {
+            $entity->setRoles(array('ROLE_ADMIN'));
+            /** @var UserManager $userManager */
+            $userManager = $this->get('user_bundle.user.manager');
+            $userManager->saveUser($entity);
+
+            $this->get('session')->getFlashBag()->add('success', $this->trans("Created Sucessfully!"));
+
+            return $this->redirect($this->generateUrl($routes['list_route'], array('id' => $entity->getId())));
+        }
+
+        return $this->render(
+            $templateString,
+            array('entity' => $entity,
+                'form'   => $form->createView(),
+                'action_title'=>$actionTitle)  +
+            $routes
+        );
     }
 
     /**
@@ -72,7 +99,37 @@ class AdminController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
-        return parent::updateAction($request, $id);
+        $templateString = $this->resolveTemplateString('edit');
+        $routes = $this->getAllRoutes();
+        $actionTitle = $this->getActionTitle('edit', 'Edition');
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository($this->bundleName.':'.$this->entityName)->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find '.$this->entityName.' entity.');
+        }
+
+        $editForm   = $this->createForm(new $this->formType(), $entity);
+        $editForm->bind($request);
+
+        if ($editForm->isValid()) {
+            /** @var UserManager $userManager */
+            $userManager = $this->get('user_bundle.user.manager');
+            $userManager->saveUser($entity);
+
+            $this->get('session')->getFlashBag()->add('success', $this->trans("Your changes were saved!"));
+
+            return $this->redirect($this->generateUrl($routes['edit_route'], array('id' => $id)));
+        }
+
+
+        return $this->render(
+            $templateString,
+            array('entity' => $entity,
+                'form'   => $editForm->createView(),
+                'action_title'=>$actionTitle) +
+            $routes
+        );
     }
     
     /**

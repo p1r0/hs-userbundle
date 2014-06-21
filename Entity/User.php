@@ -39,6 +39,9 @@ class User implements AdvancedUserInterface, Serializable
      * @ORM\Column(name="password", type="string", length=255)
      */
     private $password;
+
+    /** @var string  */
+    private $plainPassword = '';
     
     /**
      * @var string
@@ -252,4 +255,19 @@ class User implements AdvancedUserInterface, Serializable
         $this->id = $data['id'];
     }
 
+    /**
+     * @param string $plainPassword
+     */
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
 }

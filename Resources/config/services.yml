@@ -3,3 +3,6 @@ services:
         class: Heapstersoft\Base\UserBundle\EventListener\ConfigureMenuListener
         tags:
           - { name: kernel.event_listener, event: hsadmin_bundle.menu_configure, method: onMenuConfigure }
+    user_bundle.user.manager:
+      class: Heapstersoft\Base\UserBundle\Services\UserManager
+      arguments: ["@security.encoder_factory", "@doctrine.orm.entity_manager"]
